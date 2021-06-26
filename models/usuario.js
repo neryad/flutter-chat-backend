@@ -29,3 +29,4 @@ UsuarioSchema.method('toJSON', function () {
   return object;
 });
 module.exports = model('Usuario', UsuarioSchema);
+//boradps
