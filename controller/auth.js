@@ -43,9 +43,9 @@ const crearUsuario = async (req, res = response) => {
 const loginUser = async (req, res = response) => {
   const { email, password } = req.body;
   try {
-    const userDb = await Usuario.findOne({ email });
+    const usuario = await Usuario.findOne({ email });
 
-    if (!userDb) {
+    if (!usuario) {
       return res.status(404).json({
         ok: false,
         msg: 'Email no encontrado',
@@ -54,7 +54,7 @@ const loginUser = async (req, res = response) => {
 
     //Validar el apssword
 
-    const validPassword = bcrypt.compareSync(password, userDb.password);
+    const validPassword = bcrypt.compareSync(password, usuario.password);
 
     if (!validPassword) {
       return res.status(400).json({
@@ -63,12 +63,12 @@ const loginUser = async (req, res = response) => {
       });
     }
 
-    const token = await generarJwt(userDb.id);
+    const token = await generarJwt(usuario.id);
 
     return res.json({
       ok: true,
       msg: 'login',
-      userDb,
+      usuario,
       token,
     });
   } catch (error) {

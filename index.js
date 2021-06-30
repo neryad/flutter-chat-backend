@@ -22,6 +22,8 @@ require('./sockets/socket');
 // Rutas
 
 app.use('/api/login', require('./routes/auth'));
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/mensajes', require('./routes/mensajes'));
 
 // Path público
 const publicPath = path.resolve(__dirname, 'public');
